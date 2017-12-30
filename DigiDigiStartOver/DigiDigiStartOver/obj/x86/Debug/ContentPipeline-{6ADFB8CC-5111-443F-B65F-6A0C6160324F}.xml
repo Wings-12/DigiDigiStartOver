@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline">
+  <Asset Type="Pipeline:BuildItemCollection">
+    <Item>
+      <Source>HPBar.png</Source>
+      <Name>HPBar</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Wing\documents\visual studio 2015\Projects\DigiDigiStartOver\DigiDigiStartOver\DigiDigiStartOver\bin\x86\Debug\Content\HPBar.xnb</Output>
+      <Time>2017-12-27T23:01:35.3453132+09:00</Time>
+    </Item>
+    <Item>
+      <Source>HPGauge.jpg</Source>
+      <Name>HPGauge</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Wing\documents\visual studio 2015\Projects\DigiDigiStartOver\DigiDigiStartOver\DigiDigiStartOver\bin\x86\Debug\Content\HPGauge.xnb</Output>
+      <Time>2017-12-27T23:01:46.7707348+09:00</Time>
+    </Item>
+    <Item>
+      <Source>dark-tech-background.jpg</Source>
+      <Name>dark-tech-background</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Wing\documents\visual studio 2015\Projects\DigiDigiStartOver\DigiDigiStartOver\DigiDigiStartOver\bin\x86\Debug\Content\dark-tech-background.xnb</Output>
+      <Time>2017-12-28T06:31:21.0983962+09:00</Time>
+    </Item>
+    <Item>
+      <Source>hackmon1P.png</Source>
+      <Name>hackmon1P</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Wing\documents\visual studio 2015\Projects\DigiDigiStartOver\DigiDigiStartOver\DigiDigiStartOver\bin\x86\Debug\Content\hackmon1P.xnb</Output>
+      <Time>2017-12-29T18:26:16.0008136+09:00</Time>
+    </Item>
+    <Item>
+      <Source>hackmon2P.png</Source>
+      <Name>hackmon2P</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Wing\documents\visual studio 2015\Projects\DigiDigiStartOver\DigiDigiStartOver\DigiDigiStartOver\bin\x86\Debug\Content\hackmon2P.xnb</Output>
+      <Time>2017-12-29T18:26:22.1646821+09:00</Time>
+    </Item>
+    <BuildSuccessful>true</BuildSuccessful>
+    <Settings>
+      <ContentProjectGUID>{6ADFB8CC-5111-443F-B65F-6A0C6160324F}</ContentProjectGUID>
+      <TargetPlatform>Windows</TargetPlatform>
+      <TargetProfile>Reach</TargetProfile>
+      <BuildConfiguration>Debug</BuildConfiguration>
+      <CompressContent>false</CompressContent>
+      <RootDirectory>C:\Users\Wing\documents\visual studio 2015\Projects\DigiDigiStartOver\DigiDigiStartOver\DigiDigiStartOverContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\Wing\documents\visual studio 2015\Projects\DigiDigiStartOver\DigiDigiStartOver\DigiDigiStartOver\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\Wing\documents\visual studio 2015\Projects\DigiDigiStartOver\DigiDigiStartOver\DigiDigiStartOver\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Wing\documents\visual studio 2015\Projects\DigiDigiStartOver\DigiDigiStartOver\DigiDigiStartOver\bin\x86\Debug\Content\</OutputDirectory>
+    </Settings>
+    <Assemblies>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
+        <Value>2011-09-01T16:22:30+09:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.VideoImporters.dll</Key>
+        <Value>2011-09-01T16:22:30+09:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
+        <Value>2011-09-01T16:22:30+09:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
+        <Value>2011-09-01T16:22:30+09:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
+        <Value>2011-09-01T16:22:30+09:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.AudioImporters.dll</Key>
+        <Value>2011-09-01T16:22:30+09:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\WINDOWS\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+        <Value>2017-12-14T06:41:43.663121+09:00</Value>
+      </Assembly>
+    </Assemblies>
+  </Asset>
+</XnaContent>

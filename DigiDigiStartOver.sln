@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigiDigiStartOver", "DigiDigiStartOver\DigiDigiStartOver\DigiDigiStartOver.csproj", "{05F04E0B-D706-4F49-9C40-AAE49B726A02}"
+EndProject
+Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "DigiDigiStartOverContent", "DigiDigiStartOver\DigiDigiStartOverContent\DigiDigiStartOverContent.contentproj", "{6ADFB8CC-5111-443F-B65F-6A0C6160324F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{05F04E0B-D706-4F49-9C40-AAE49B726A02}.Debug|x86.ActiveCfg = Debug|x86
+		{05F04E0B-D706-4F49-9C40-AAE49B726A02}.Debug|x86.Build.0 = Debug|x86
+		{05F04E0B-D706-4F49-9C40-AAE49B726A02}.Release|x86.ActiveCfg = Release|x86
+		{05F04E0B-D706-4F49-9C40-AAE49B726A02}.Release|x86.Build.0 = Release|x86
+		{6ADFB8CC-5111-443F-B65F-6A0C6160324F}.Debug|x86.ActiveCfg = Debug|x86
+		{6ADFB8CC-5111-443F-B65F-6A0C6160324F}.Release|x86.ActiveCfg = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

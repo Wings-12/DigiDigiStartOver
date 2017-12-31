@@ -19,3 +19,5 @@ C:\Users\Wing\documents\visual studio 2015\Projects\DigiDigiStartOver\DigiDigiSt
 C:\Users\Wing\documents\visual studio 2015\Projects\DigiDigiStartOver\DigiDigiStartOver\DigiDigiStartOver\obj\x86\Debug\DigiDigiStartOver.pdb
 C:\Users\Wing\documents\visual studio 2015\Projects\DigiDigiStartOver\DigiDigiStartOver\DigiDigiStartOver\bin\x86\Debug\Content\hackmon1P.xnb
 C:\Users\Wing\documents\visual studio 2015\Projects\DigiDigiStartOver\DigiDigiStartOver\DigiDigiStartOver\bin\x86\Debug\Content\hackmon2P.xnb
+C:\Users\Wing\Documents\Visual Studio 2015\Projects\DigiDigiStartOver\DigiDigiStartOver\DigiDigiStartOver\bin\x86\Debug\Content\hackmonFifSlash.xnb
+C:\Users\Wing\Documents\Visual Studio 2015\Projects\DigiDigiStartOver\DigiDigiStartOver\DigiDigiStartOver\bin\x86\Debug\Content\collisionChecker.xnb

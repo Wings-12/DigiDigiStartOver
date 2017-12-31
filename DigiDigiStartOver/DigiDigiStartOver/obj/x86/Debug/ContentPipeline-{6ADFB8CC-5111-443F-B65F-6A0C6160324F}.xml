@@ -46,6 +46,24 @@
       <Output>C:\Users\Wing\documents\visual studio 2015\Projects\DigiDigiStartOver\DigiDigiStartOver\DigiDigiStartOver\bin\x86\Debug\Content\hackmon2P.xnb</Output>
       <Time>2017-12-29T18:26:22.1646821+09:00</Time>
     </Item>
+    <Item>
+      <Source>hackmonFifSlash.png</Source>
+      <Name>hackmonFifSlash</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Wing\Documents\Visual Studio 2015\Projects\DigiDigiStartOver\DigiDigiStartOver\DigiDigiStartOver\bin\x86\Debug\Content\hackmonFifSlash.xnb</Output>
+      <Time>2017-12-30T17:36:52.2583811+09:00</Time>
+    </Item>
+    <Item>
+      <Source>collisionChecker.PNG</Source>
+      <Name>collisionChecker</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Wing\Documents\Visual Studio 2015\Projects\DigiDigiStartOver\DigiDigiStartOver\DigiDigiStartOver\bin\x86\Debug\Content\collisionChecker.xnb</Output>
+      <Time>2017-12-30T17:11:21.0093754+09:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{6ADFB8CC-5111-443F-B65F-6A0C6160324F}</ContentProjectGUID>
@@ -53,10 +71,10 @@
       <TargetProfile>Reach</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\Wing\documents\visual studio 2015\Projects\DigiDigiStartOver\DigiDigiStartOver\DigiDigiStartOverContent\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\Wing\documents\visual studio 2015\Projects\DigiDigiStartOver\DigiDigiStartOver\DigiDigiStartOver\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\Wing\documents\visual studio 2015\Projects\DigiDigiStartOver\DigiDigiStartOver\DigiDigiStartOver\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\Wing\documents\visual studio 2015\Projects\DigiDigiStartOver\DigiDigiStartOver\DigiDigiStartOver\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\Wing\Documents\Visual Studio 2015\Projects\DigiDigiStartOver\DigiDigiStartOver\DigiDigiStartOverContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\Wing\Documents\Visual Studio 2015\Projects\DigiDigiStartOver\DigiDigiStartOver\DigiDigiStartOver\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\Wing\Documents\Visual Studio 2015\Projects\DigiDigiStartOver\DigiDigiStartOver\DigiDigiStartOver\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Wing\Documents\Visual Studio 2015\Projects\DigiDigiStartOver\DigiDigiStartOver\DigiDigiStartOver\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>

@@ -27,27 +27,12 @@ namespace DigiDigiStartOver
         public Vector2 position;
     }
 
-    public struct Gauge
-    {
-        public int HP, x, y, w, h;
-        public Texture2D HPBar, HPGauge;
 
-        //HPの初期化メソッド
-        public void Init(ContentManager Content, int x, int y, int w, int h)
-        //変数ContentManager Contentは下記ブロックの変数healthBarを読み込むために使う
-        {
-            this.x = x;
-            this.y = y;
-            this.w = w;
-            this.h = h;
-            HPBar = Content.Load<Texture2D>("HPBar");
-            HPBar = Content.Load<Texture2D>("HPGauge");
-        }
-    }
-            /// <summary>
-            /// This is the main type for your game
-            /// </summary>
-            public class Game1 : Microsoft.Xna.Framework.Game
+
+    /// <summary>
+    /// This is the main type for your game
+    /// </summary>
+    public class Game1 : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -65,14 +50,31 @@ namespace DigiDigiStartOver
         int frame = 0;
         // ハックモン1Pのコマ位置の宣言
         int hackmon1PFrame = 0;
+        // ハックモン1PのHPBar画像の宣言
+        Texture2D HPBarForHackmon1P;
+        // ハックモン1PのHPGauge画像の宣言
+        Texture2D HPGaugeForHackmon1P;
+        // ハックモン1Pのフィフスラッシュ画像の宣言
+        Texture2D hackmon1PfifSlash;
+        // ハックモン1Pのフィフスラッシュ画像座標の宣言
+        Vector2 hackmon1PfifSlashPosition;
+        //ハックモン１PのHPの宣言
+        int HPwidthForhackmon1P;
+
+        //当たり判定を特定する白い紙の宣言
+        Texture2D ColliderChecker;
+
 
         //ハックモン２Pのモンスタークラス
         Monster hackmon2P = new Monster();
         // ハックモン2Pのコマ位置の宣言
         int hackmon2PFrame = 0;
-
-        //Gaugeストラクトの宣言
-        Gauge gauge1;
+        // ハックモン2PのHPBar画像の宣言
+        Texture2D HPBarForHackmon2P;
+        // ハックモン2PのHPGauge画像の宣言
+        Texture2D HPGaugeForHackmon2P;
+        //ハックモン2PのHPの宣言
+        int HPwidthForhackmon2P;
 
 
 
@@ -91,11 +93,16 @@ namespace DigiDigiStartOver
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            //ハックモン1Pのスタート位置
+            //ハックモン1Pのスタート位置の初期化
             hackmon1P.position = new Vector2(20, 50);
+            //ハックモン１PのHPの初期化
+            HPwidthForhackmon1P = 250;
 
-            //ハックモン2Pのスタート位置
+
+            //ハックモン2Pのスタート位置の初期化
             hackmon2P.position = new Vector2(720, 50);
+            //ハックモン2PのHPの初期化
+            HPwidthForhackmon2P = 250;
 
             base.Initialize();
         }
@@ -112,8 +119,26 @@ namespace DigiDigiStartOver
             // TODO: use this.Content to load your game content here
             //背景画像dark-tech-backgroundのロード
             darkTechBackground = Content.Load<Texture2D>("dark-tech-background");
+            //ハックモン1P画像のロード
             hackmon1P.Image = Content.Load<Texture2D>("hackmon1P");
+            // ハックモン1PのHPBar画像のロード
+            HPBarForHackmon1P = Content.Load<Texture2D>("HPBar");
+            // ハックモン1PのHPGauge画像のロード
+            HPGaugeForHackmon1P = Content.Load<Texture2D>("HPGauge");
+            // ハックモン1Pのフィフスラッシュ画像のロード
+            hackmon1PfifSlash = Content.Load<Texture2D>("hackmonFifSlash");
+
+            //当たり判定を特定する白い紙のロード
+            ColliderChecker = Content.Load<Texture2D>("CollisionChecker");
+
+
+
             hackmon2P.Image = Content.Load<Texture2D>("hackmon2P");
+            // ハックモン2PのHPBar画像の宣言
+            HPBarForHackmon2P = Content.Load<Texture2D>("HPBar");
+            // ハックモン2PのHPGauge画像の宣言
+            HPGaugeForHackmon2P = Content.Load<Texture2D>("HPGauge"); ;
+
 
 
         }
@@ -129,7 +154,7 @@ namespace DigiDigiStartOver
 
         /// <summary>
         /// Allows the game to run logic such as updating the world,
-        /// checking for collisions, gathering input, and playing audio.
+        /// checking for Colliders, gathering input, and playing audio.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
@@ -146,14 +171,17 @@ namespace DigiDigiStartOver
 
             // TODO: Add your update logic here
 
-            float arrowKeyControlPositionValueX = 4;
-            float arrowKeyControlPositionValueY = 4;
-
             //daswキーでハックモン1Pを移動
             //dが押されたらハックモン1Pが右へ移動
             if (KeyboardState.IsKeyDown(Keys.D))
             {
-                hackmon1P.position.X += arrowKeyControlPositionValueX;
+                hackmon1P.position.X += 4;
+                // ハックモン1Pのフィフスラッシュ画像座標の宣言
+                hackmon1PfifSlashPosition = hackmon1P.position;
+                hackmon1PfifSlashPosition.X += 50;
+
+                //ハックモン１Pのフィフスラッシュの位置を常にハックモン１Pより前に表示
+                hackmon1PfifSlashPosition.X += 4;
 
                 frame++;
                 //0回呼び出されたらコマを移動させる
@@ -167,12 +195,24 @@ namespace DigiDigiStartOver
                     //回数をクリア
                     frame = 0;
                 }
+
+
+
+
             }
 
             //aが押されたらハックモン1Pが左へ移動
             if (KeyboardState.IsKeyDown(Keys.A))
             {
-                hackmon1P.position.X -= arrowKeyControlPositionValueX;
+                hackmon1P.position.X -= 4;
+
+                // ハックモン1Pのフィフスラッシュ画像座標を移動方向に向ける
+                hackmon1PfifSlashPosition = hackmon1P.position;
+                hackmon1PfifSlashPosition.X -= 80;
+
+                //ハックモン１Pのフィフスラッシュの位置を常にハックモン１Pより前に表示
+                hackmon1PfifSlashPosition.X -= 4;
+
 
                 frame++;
                 //0回呼び出されたらコマを移動させる
@@ -191,7 +231,14 @@ namespace DigiDigiStartOver
             //Sが押されたらハックモン1Pが下に移動
             if (KeyboardState.IsKeyDown(Keys.S))
             {
-                hackmon1P.position.Y += arrowKeyControlPositionValueY;
+                hackmon1P.position.Y += 4;
+
+                // ハックモン1Pのフィフスラッシュ画像座標を移動方向に向ける
+                hackmon1PfifSlashPosition = hackmon1P.position;
+                hackmon1PfifSlashPosition.Y += 50;
+
+                //ハックモン１Pのフィフスラッシュの位置を常にハックモン１Pより前に表示
+                hackmon1PfifSlashPosition.Y += 4;
 
                 frame++;
                 //0回呼び出されたらコマを移動させる
@@ -210,7 +257,15 @@ namespace DigiDigiStartOver
             //wが押されたらハックモン1Pが上に移動
             if (KeyboardState.IsKeyDown(Keys.W))
             {
-                hackmon1P.position.Y -= arrowKeyControlPositionValueY;
+                hackmon1P.position.Y -= 4;
+
+                // ハックモン1Pのフィフスラッシュ画像座標を移動方向に向ける
+                hackmon1PfifSlashPosition = hackmon1P.position;
+                hackmon1PfifSlashPosition.Y -= 80;
+
+                //ハックモン１Pのフィフスラッシュの位置を常にハックモン１Pより前に表示
+                hackmon1PfifSlashPosition.Y -= 4;
+
 
                 frame++;
                 //0回呼び出されたらコマを移動させる
@@ -231,7 +286,7 @@ namespace DigiDigiStartOver
             //左が押されたらX座標を4ピクセル減算する
             if (KeyboardState.IsKeyDown(Keys.Left))
             {
-                hackmon2P.position.X -= arrowKeyControlPositionValueX;
+                hackmon2P.position.X -= 4;
 
                 frame++;
                 //0回呼び出されたらコマを移動させる
@@ -251,7 +306,7 @@ namespace DigiDigiStartOver
             //右が押されたらX座標を4ピクセル加算
             if (KeyboardState.IsKeyDown(Keys.Right))
             {
-                hackmon2P.position.X += arrowKeyControlPositionValueX;
+                hackmon2P.position.X += 4;
 
                 frame++;
                 //0回呼び出されたらコマを移動させる
@@ -273,7 +328,7 @@ namespace DigiDigiStartOver
             //下が押されたらX座標を4ピクセル加算
             if (KeyboardState.IsKeyDown(Keys.Down))
             {
-                hackmon2P.position.Y += arrowKeyControlPositionValueY;
+                hackmon2P.position.Y += 4;
 
                 frame++;
                 //0回呼び出されたらコマを移動させる
@@ -295,7 +350,7 @@ namespace DigiDigiStartOver
             //上が押されたらX座標を4ピクセル減算する
             if (KeyboardState.IsKeyDown(Keys.Up))
             {
-                hackmon2P.position.Y -= arrowKeyControlPositionValueY;
+                hackmon2P.position.Y -= 4;
 
                 frame++;
                 //0回呼び出されたらコマを移動させる
@@ -329,9 +384,47 @@ namespace DigiDigiStartOver
 
             //ハックモン1Pの画像を描画
             spriteBatch.Draw(hackmon1P.Image, hackmon1P.position, new Rectangle(hackmon1PFrame * 65, 0, 65, 65), Color.White);
+            // ハックモン1PのHPBar画像を描画
+            spriteBatch.Draw(HPBarForHackmon1P, new Vector2(20, 20), new Rectangle(0, 0, 250, 20), Color.White);
+            // ハックモン1PのHPGauge画像を描画
+            spriteBatch.Draw(HPGaugeForHackmon1P, new Vector2(20, 20), new Rectangle(0, 0, HPwidthForhackmon1P, 20), Color.White);
+            //Spaceでハックモン1Pのフィフスラッシュ攻撃
+            if (KeyboardState.IsKeyDown(Keys.Space))
+            {
+                // ハックモン1Pのフィフスラッシュ画像描画
+                //Rectangleはintを取るメソッドなのでキャストでfloatをintに変換
+                int castForHackmon1PfifSlashColliderX;
+                castForHackmon1PfifSlashColliderX = (int)hackmon1PfifSlashPosition.X;
+                int castForHackmon1PfifSlashColliderY;
+                castForHackmon1PfifSlashColliderY = (int)hackmon1PfifSlashPosition.Y;
+
+                Rectangle hackmon1PfifSlashCollider = new Rectangle(castForHackmon1PfifSlashColliderX, castForHackmon1PfifSlashColliderY, 90, 90);
+
+                int castForHackmon2PimageColliderX;
+                castForHackmon2PimageColliderX = (int)hackmon2P.position.X;
+                int castForHackmon2PimageColliderY;
+                castForHackmon2PimageColliderY = (int)hackmon2P.position.Y;
+
+                Rectangle hackmon2PimageCollider = new Rectangle(castForHackmon2PimageColliderX, castForHackmon2PimageColliderY, 65, 65);
+
+                spriteBatch.Draw(hackmon1PfifSlash, hackmon1PfifSlashPosition, new Rectangle(0, 0, 90, 90), Color.White);
+                //ハックモン1Pがフィフスラッシュしたときにハックモン2Pに当たったらハックモン2Pにダメージ
+                if (hackmon1PfifSlashCollider.Intersects(hackmon2PimageCollider))
+                {
+                    HPwidthForhackmon2P -= 1;
+                }
+            }
+            //フィフスラッシュの当たり判定を特定する半透明の赤い矩形を描画
+            spriteBatch.Draw(ColliderChecker, hackmon1PfifSlashPosition, new Rectangle(0, 0, 90, 90), Color.Red * 0.5f);
 
             //ハックモン2Pの画像を描画
             spriteBatch.Draw(hackmon2P.Image, hackmon2P.position, new Rectangle(hackmon2PFrame * 65, 0, 65, 65), Color.White);
+            //ハックモン2Pの当たり判定を特定する半透明の赤い矩形を描画
+            spriteBatch.Draw(ColliderChecker, hackmon2P.position, new Rectangle(hackmon2PFrame * 65, 0, 65, 65), Color.Green * 0.5f);
+            // ハックモン2PのHPBar画像の宣言
+            spriteBatch.Draw(HPBarForHackmon2P, new Vector2(530, 20), new Rectangle(0, 0, 250, 20), Color.White);
+            // ハックモン2PのHPGauge画像の宣言
+            spriteBatch.Draw(HPGaugeForHackmon2P, new Vector2(530, 20), new Rectangle(0, 0, HPwidthForhackmon2P, 20), Color.White);
 
 
             spriteBatch.End();

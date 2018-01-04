@@ -47,15 +47,6 @@
       <Time>2017-12-29T18:26:22.1646821+09:00</Time>
     </Item>
     <Item>
-      <Source>hackmonFifSlash.png</Source>
-      <Name>hackmonFifSlash</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Wing\Documents\Visual Studio 2015\Projects\DigiDigiStartOver\DigiDigiStartOver\DigiDigiStartOver\bin\x86\Debug\Content\hackmonFifSlash.xnb</Output>
-      <Time>2017-12-30T17:36:52.2583811+09:00</Time>
-    </Item>
-    <Item>
       <Source>collisionChecker.PNG</Source>
       <Name>collisionChecker</Name>
       <Importer>TextureImporter</Importer>
@@ -63,6 +54,42 @@
       <Options>None</Options>
       <Output>C:\Users\Wing\Documents\Visual Studio 2015\Projects\DigiDigiStartOver\DigiDigiStartOver\DigiDigiStartOver\bin\x86\Debug\Content\collisionChecker.xnb</Output>
       <Time>2017-12-30T17:11:21.0093754+09:00</Time>
+    </Item>
+    <Item>
+      <Source>hackmon1Pname.PNG</Source>
+      <Name>hackmon1Pname</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Wing\Documents\Visual Studio 2015\Projects\DigiDigiStartOver\DigiDigiStartOver\DigiDigiStartOver\bin\x86\Debug\Content\hackmon1Pname.xnb</Output>
+      <Time>2017-12-31T14:12:20.5593534+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Complete.PNG</Source>
+      <Name>Complete</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Wing\Documents\Visual Studio 2015\Projects\DigiDigiStartOver\DigiDigiStartOver\DigiDigiStartOver\bin\x86\Debug\Content\Complete.xnb</Output>
+      <Time>2017-12-31T15:55:00.7635598+09:00</Time>
+    </Item>
+    <Item>
+      <Source>hackmonJab.png</Source>
+      <Name>hackmonJab</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Wing\Documents\Visual Studio 2015\Projects\DigiDigiStartOver\DigiDigiStartOver\DigiDigiStartOver\bin\x86\Debug\Content\hackmonJab.xnb</Output>
+      <Time>2018-01-01T20:42:10.3879492+09:00</Time>
+    </Item>
+    <Item>
+      <Source>hackmonLongRangeAttack.PNG</Source>
+      <Name>hackmonLongRangeAttack</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Wing\Documents\Visual Studio 2015\Projects\DigiDigiStartOver\DigiDigiStartOver\DigiDigiStartOver\bin\x86\Debug\Content\hackmonLongRangeAttack.xnb</Output>
+      <Time>2018-01-01T20:44:22.9265662+09:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

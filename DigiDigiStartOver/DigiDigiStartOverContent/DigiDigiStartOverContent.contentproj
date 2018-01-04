@@ -72,8 +72,29 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="hackmonFifSlash.png">
-      <Name>hackmonFifSlash</Name>
+    <Compile Include="hackmon1Pname.PNG">
+      <Name>hackmon1Pname</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Complete.PNG">
+      <Name>Complete</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="hackmonJab.png">
+      <Name>hackmonJab</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="hackmonLongRangeAttack.PNG">
+      <Name>hackmonLongRangeAttack</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

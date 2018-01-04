@@ -11,12 +11,53 @@ using Microsoft.Xna.Framework.Media;
 
 namespace DigiDigiStartOver
 {
-    public class Monster
+    /// <summary>
+    /// ハックモンを作るためのクラス
+    /// </summary>
+    public class Hackmon
     {
-        //モンスター画像の宣言
-        public Texture2D Image;
-        //モンスター画像の座標の宣言
+        public Texture2D image;
         public Vector2 position;
+        public Texture2D name;
+        public Vector2 namePosition;
+        public Texture2D jab;
+        public Vector2 jabPosition;
+        public Texture2D longRangeAttack;
+        public Vector2 longRangeAttackPosition;
+
+        /// <summary>
+        /// ハックモンのコンストラクタ（全パラメータの初期化）
+        /// </summary>
+        /// <param name="Content">リソースを読み込むための変数（使うときはContentと入力）</param>
+        /// <param name="image">ハックモンの画像</param>
+        /// <param name="hackmonPositionX">ハックモンのX座標</param>
+        /// <param name="hackmonPositionY">ハックモンのY座標</param>
+        /// <param name="name">ハックモンの名前の画像</param>
+        /// <param name="namePositionX">ハックモンの名前のX座標</param>
+        /// <param name="namePositionY">ハックモンの名前のY座標</param>
+        /// <param name="jab">ハックモンの近接攻撃の画像</param>
+        /// <param name="jabPositionX">ハックモンの近接攻撃のX座標</param>
+        /// <param name="jabPositionY">ハックモンの近接攻撃のY座標</param>
+        /// <param name="longRangeAttack">ハックモンの遠距離攻撃の画像</param>
+        /// <param name="longRangeAttackPositionX">ハックモンの遠距離攻撃のX座標</param>
+        /// <param name="longRangeAttackPositionY">ハックモンの遠距離攻撃のY座標</param>
+        public Hackmon(ContentManager Content, string image, int hackmonPositionX,int hackmonPositionY,string name,int namePositionX,int namePositionY,
+            string jab,int jabPositionX, int jabPositionY, string longRangeAttack, int longRangeAttackPositionX, int longRangeAttackPositionY)
+        {
+            this.image = Content.Load<Texture2D>(image);
+            this.position = new Vector2(hackmonPositionX, hackmonPositionY);
+            this.name = Content.Load<Texture2D>(name);
+            this.namePosition = new Vector2(namePositionX, namePositionY);
+            this.jab = Content.Load<Texture2D>(jab);
+            this.jabPosition = new Vector2(jabPositionX, jabPositionY);
+            this.longRangeAttack = Content.Load<Texture2D>(longRangeAttack);
+            this.longRangeAttackPosition = new Vector2(longRangeAttackPositionX, longRangeAttackPositionY);
+        }
+
+
+        public Hackmon()
+        {
+        }
     }
 
     public class Font
@@ -44,7 +85,7 @@ namespace DigiDigiStartOver
         KeyboardState KeyboardState;
 
         //ハックモン1Pのモンスタークラス
-        Monster hackmon1P = new Monster();
+        Hackmon hackmon1P = new Hackmon();
 
         //フレームの宣言
         int frame = 0;
@@ -54,19 +95,16 @@ namespace DigiDigiStartOver
         Texture2D HPBarForHackmon1P;
         // ハックモン1PのHPGauge画像の宣言
         Texture2D HPGaugeForHackmon1P;
-        // ハックモン1Pのフィフスラッシュ画像の宣言
-        Texture2D hackmon1PfifSlash;
-        // ハックモン1Pのフィフスラッシュ画像座標の宣言
-        Vector2 hackmon1PfifSlashPosition;
         //ハックモン１PのHPの宣言
-        int HPwidthForhackmon1P;
+        float HPwidthForhackmon1P;
+        //ハックモン1Pの名前を宣言
+
 
         //当たり判定を特定する白い紙の宣言
         Texture2D ColliderChecker;
 
-
         //ハックモン２Pのモンスタークラス
-        Monster hackmon2P = new Monster();
+        Hackmon hackmon2P = new Hackmon();
         // ハックモン2Pのコマ位置の宣言
         int hackmon2PFrame = 0;
         // ハックモン2PのHPBar画像の宣言
@@ -74,8 +112,12 @@ namespace DigiDigiStartOver
         // ハックモン2PのHPGauge画像の宣言
         Texture2D HPGaugeForHackmon2P;
         //ハックモン2PのHPの宣言
-        int HPwidthForhackmon2P;
+        float HPwidthForhackmon2P;
 
+        //ハックモン１Pかハックモン2PのどちらかのHPが0になったら「Complete」と表示する(宣言)
+        Texture2D Complete;
+        //キャラの歩くスピードを宣言
+        int walkSpeed;
 
 
         public Game1()
@@ -94,15 +136,30 @@ namespace DigiDigiStartOver
         {
             // TODO: Add your initialization logic here
             //ハックモン1Pのスタート位置の初期化
-            hackmon1P.position = new Vector2(20, 50);
+            hackmon1P.position = new Vector2(200, 200);
             //ハックモン１PのHPの初期化
-            HPwidthForhackmon1P = 250;
+            HPwidthForhackmon1P = 250.0f;
+            // ハックモン1Pの近接攻撃画像座標の宣言
+            this.hackmon1P.jabPosition = new Vector2(250, 200);
+            // ハックモン1Pの遠距離攻撃画像座標の宣言
+            this.hackmon1P.longRangeAttackPosition = new Vector2(250, 200);
+
+
+            //ハックモン1Pの名前の位置の初期化
+            hackmon1P.namePosition = new Vector2(200, 170);
+
+
 
 
             //ハックモン2Pのスタート位置の初期化
-            hackmon2P.position = new Vector2(720, 50);
+            hackmon2P.position = new Vector2(500, 200);
             //ハックモン2PのHPの初期化
-            HPwidthForhackmon2P = 250;
+            HPwidthForhackmon2P = 250.0f;
+
+
+            //キャラの歩くスピードを初期化
+            walkSpeed = 4;
+
 
             base.Initialize();
         }
@@ -120,26 +177,44 @@ namespace DigiDigiStartOver
             //背景画像dark-tech-backgroundのロード
             darkTechBackground = Content.Load<Texture2D>("dark-tech-background");
             //ハックモン1P画像のロード
-            hackmon1P.Image = Content.Load<Texture2D>("hackmon1P");
+            hackmon1P.image = Content.Load<Texture2D>("hackmon1P");
             // ハックモン1PのHPBar画像のロード
             HPBarForHackmon1P = Content.Load<Texture2D>("HPBar");
             // ハックモン1PのHPGauge画像のロード
             HPGaugeForHackmon1P = Content.Load<Texture2D>("HPGauge");
-            // ハックモン1Pのフィフスラッシュ画像のロード
-            hackmon1PfifSlash = Content.Load<Texture2D>("hackmonFifSlash");
+            // ハックモン1Pの近接攻撃画像のロード
+            hackmon1P.jab = Content.Load<Texture2D>("hackmonjab");
+            // ハックモン1Pの遠距離攻撃画像のロード
+            hackmon1P.longRangeAttack = Content.Load<Texture2D>("hackmonlongRangeAttack");
+            //ハックモン1Pの名前をロード
+            hackmon1P.name = Content.Load<Texture2D>("hackmon1Pname");
+
+
+
+
+            //コンストラクタの使用練習で使った
+
+            //hackmon1P = new Hackmon(Content, "hackmon1P", 250, 200, "hackmon1Pname", 250, 180, "hackmonJab", 300, 200,
+            //    "hackmonLongRangeAttack", 300, 200);
+
+
 
             //当たり判定を特定する白い紙のロード
             ColliderChecker = Content.Load<Texture2D>("CollisionChecker");
 
 
 
-            hackmon2P.Image = Content.Load<Texture2D>("hackmon2P");
+            hackmon2P.image = Content.Load<Texture2D>("hackmon2P");
             // ハックモン2PのHPBar画像の宣言
             HPBarForHackmon2P = Content.Load<Texture2D>("HPBar");
             // ハックモン2PのHPGauge画像の宣言
             HPGaugeForHackmon2P = Content.Load<Texture2D>("HPGauge"); ;
+            // ハックモン2Pの近接攻撃画像のロード
+            hackmon2P.jab = Content.Load<Texture2D>("hackmonjab");
 
 
+            //ハックモン１Pかハックモン2PのどちらかのHPが0になったら「Complete」と表示する(ロード)
+            Complete = Content.Load<Texture2D>("Complete");
 
         }
 
@@ -170,18 +245,23 @@ namespace DigiDigiStartOver
 
 
             // TODO: Add your update logic here
-
             //daswキーでハックモン1Pを移動
             //dが押されたらハックモン1Pが右へ移動
             if (KeyboardState.IsKeyDown(Keys.D))
             {
-                hackmon1P.position.X += 4;
-                // ハックモン1Pのフィフスラッシュ画像座標の宣言
-                hackmon1PfifSlashPosition = hackmon1P.position;
-                hackmon1PfifSlashPosition.X += 50;
+                hackmon1P.position.X += walkSpeed;
+                //dが押されたらハックモン1Pの名前が左に移動
+                hackmon1P.namePosition.X += walkSpeed;
 
-                //ハックモン１Pのフィフスラッシュの位置を常にハックモン１Pより前に表示
-                hackmon1PfifSlashPosition.X += 4;
+                // ハックモン1Pの近接攻撃画像座標の宣言
+                hackmon1P.jabPosition = hackmon1P.position;
+                hackmon1P.jabPosition.X += 50;
+
+                // ハックモン1Pの遠距離攻撃画像座標の宣言
+                hackmon1P.longRangeAttackPosition = hackmon1P.position;
+                hackmon1P.longRangeAttackPosition.X += 50;
+
+
 
                 frame++;
                 //0回呼び出されたらコマを移動させる
@@ -204,14 +284,18 @@ namespace DigiDigiStartOver
             //aが押されたらハックモン1Pが左へ移動
             if (KeyboardState.IsKeyDown(Keys.A))
             {
-                hackmon1P.position.X -= 4;
+                hackmon1P.position.X -= walkSpeed;
+                //aが押されたらハックモン1Pの名前が左に移動
+                hackmon1P.namePosition.X -= walkSpeed;
 
-                // ハックモン1Pのフィフスラッシュ画像座標を移動方向に向ける
-                hackmon1PfifSlashPosition = hackmon1P.position;
-                hackmon1PfifSlashPosition.X -= 80;
 
-                //ハックモン１Pのフィフスラッシュの位置を常にハックモン１Pより前に表示
-                hackmon1PfifSlashPosition.X -= 4;
+                // ハックモン1Pの近接攻撃画像座標を移動方向に向ける
+                hackmon1P.jabPosition = hackmon1P.position;
+                hackmon1P.jabPosition.X -= 80;
+
+                // ハックモン1Pの遠距離攻撃画像座標の宣言
+                hackmon1P.longRangeAttackPosition = hackmon1P.position;
+                hackmon1P.longRangeAttackPosition.X -= 50;
 
 
                 frame++;
@@ -231,14 +315,19 @@ namespace DigiDigiStartOver
             //Sが押されたらハックモン1Pが下に移動
             if (KeyboardState.IsKeyDown(Keys.S))
             {
-                hackmon1P.position.Y += 4;
+                hackmon1P.position.Y += walkSpeed;
+                //sが押されたらハックモン1Pの名前が下に移動
+                hackmon1P.namePosition.Y += walkSpeed;
 
-                // ハックモン1Pのフィフスラッシュ画像座標を移動方向に向ける
-                hackmon1PfifSlashPosition = hackmon1P.position;
-                hackmon1PfifSlashPosition.Y += 50;
 
-                //ハックモン１Pのフィフスラッシュの位置を常にハックモン１Pより前に表示
-                hackmon1PfifSlashPosition.Y += 4;
+                // ハックモン1Pの近接攻撃画像座標を移動方向に向ける
+                hackmon1P.jabPosition = hackmon1P.position;
+                hackmon1P.jabPosition.Y += 50;
+
+                // ハックモン1Pの遠距離攻撃画像座標の宣言
+                hackmon1P.longRangeAttackPosition = hackmon1P.position;
+                hackmon1P.longRangeAttackPosition.Y += 50;
+
 
                 frame++;
                 //0回呼び出されたらコマを移動させる
@@ -257,14 +346,18 @@ namespace DigiDigiStartOver
             //wが押されたらハックモン1Pが上に移動
             if (KeyboardState.IsKeyDown(Keys.W))
             {
-                hackmon1P.position.Y -= 4;
+                hackmon1P.position.Y -= walkSpeed;
+                //wが押されたらハックモン1Pの名前が上に移動
+                hackmon1P.namePosition.Y -= walkSpeed;
 
-                // ハックモン1Pのフィフスラッシュ画像座標を移動方向に向ける
-                hackmon1PfifSlashPosition = hackmon1P.position;
-                hackmon1PfifSlashPosition.Y -= 80;
+                // ハックモン1Pの近接攻撃画像座標を移動方向に向ける
+                hackmon1P.jabPosition = hackmon1P.position;
+                hackmon1P.jabPosition.Y -= 80;
 
-                //ハックモン１Pのフィフスラッシュの位置を常にハックモン１Pより前に表示
-                hackmon1PfifSlashPosition.Y -= 4;
+                // ハックモン1Pの遠距離攻撃画像座標の宣言
+                hackmon1P.longRangeAttackPosition = hackmon1P.position;
+                hackmon1P.longRangeAttackPosition.Y -= 50;
+
 
 
                 frame++;
@@ -281,12 +374,24 @@ namespace DigiDigiStartOver
                 }
             }
 
+            //ハックモン1Pが画面外へ出ないようにする
+            if (hackmon1P.position.X <= 0) hackmon1P.position.X = 0;
+            if (hackmon1P.position.X >= 800 - 65) hackmon1P.position.X = 800 - 65;
+            if (hackmon1P.position.Y <= 0) hackmon1P.position.Y = 0;
+            if (hackmon1P.position.Y >= 600 - 180) hackmon1P.position.Y = 600 - 180;
+
+
 
             //方向キーでハックモン2Pを移動
             //左が押されたらX座標を4ピクセル減算する
             if (KeyboardState.IsKeyDown(Keys.Left))
             {
-                hackmon2P.position.X -= 4;
+                hackmon2P.position.X -= walkSpeed;
+                // ハックモン2Pの近接攻撃画像座標の宣言
+                hackmon2P.jabPosition = hackmon2P.position;
+                hackmon2P.jabPosition.X -= 80;
+
+
 
                 frame++;
                 //0回呼び出されたらコマを移動させる
@@ -306,7 +411,11 @@ namespace DigiDigiStartOver
             //右が押されたらX座標を4ピクセル加算
             if (KeyboardState.IsKeyDown(Keys.Right))
             {
-                hackmon2P.position.X += 4;
+                hackmon2P.position.X += walkSpeed;
+                // ハックモン2Pの近接攻撃画像座標を移動方向に向ける
+                hackmon2P.jabPosition = hackmon2P.position;
+                hackmon2P.jabPosition.X += 50;
+
 
                 frame++;
                 //0回呼び出されたらコマを移動させる
@@ -328,7 +437,11 @@ namespace DigiDigiStartOver
             //下が押されたらX座標を4ピクセル加算
             if (KeyboardState.IsKeyDown(Keys.Down))
             {
-                hackmon2P.position.Y += 4;
+                hackmon2P.position.Y += walkSpeed;
+                // ハックモン2Pの近接攻撃画像座標を移動方向に向ける
+                hackmon2P.jabPosition = hackmon2P.position;
+                hackmon2P.jabPosition.Y += 50;
+
 
                 frame++;
                 //0回呼び出されたらコマを移動させる
@@ -350,7 +463,11 @@ namespace DigiDigiStartOver
             //上が押されたらX座標を4ピクセル減算する
             if (KeyboardState.IsKeyDown(Keys.Up))
             {
-                hackmon2P.position.Y -= 4;
+                hackmon2P.position.Y -= walkSpeed;
+                // ハックモン2Pの近接攻撃画像座標を移動方向に向ける
+                hackmon2P.jabPosition = hackmon2P.position;
+                hackmon2P.jabPosition.Y -= 80;
+
 
                 frame++;
                 //0回呼び出されたらコマを移動させる
@@ -380,25 +497,33 @@ namespace DigiDigiStartOver
             // TODO: Add your drawing code here
             spriteBatch.Begin();
             //背景画像dark-tech-backgroundを描画
+            Rectangle darkTechBackgroundCollider = new Rectangle(0, 0, 800, 600);
             spriteBatch.Draw(darkTechBackground, new Rectangle(0, 0, 800, 600), Color.White);
+            //背景画像dark-tech-backgroundの当たり判定を特定する半透明の緑色の矩形を描画
+            spriteBatch.Draw(ColliderChecker, new Vector2(0,0), new Rectangle(0, 0, 800, 600), Color.Blue * 0.5f);
+
 
             //ハックモン1Pの画像を描画
-            spriteBatch.Draw(hackmon1P.Image, hackmon1P.position, new Rectangle(hackmon1PFrame * 65, 0, 65, 65), Color.White);
+            spriteBatch.Draw(hackmon1P.image, hackmon1P.position, new Rectangle(hackmon1PFrame * 65, 0, 65, 65), Color.White);
+            //ハックモン1Pの当たり判定を特定する半透明の緑色の矩形を描画
+            spriteBatch.Draw(ColliderChecker, hackmon1P.position, new Rectangle(hackmon1PFrame * 65, 0, 65, 65), Color.Green * 0.5f);
             // ハックモン1PのHPBar画像を描画
             spriteBatch.Draw(HPBarForHackmon1P, new Vector2(20, 20), new Rectangle(0, 0, 250, 20), Color.White);
             // ハックモン1PのHPGauge画像を描画
-            spriteBatch.Draw(HPGaugeForHackmon1P, new Vector2(20, 20), new Rectangle(0, 0, HPwidthForhackmon1P, 20), Color.White);
-            //Spaceでハックモン1Pのフィフスラッシュ攻撃
+            int castForHPwidthForhackmon1P;
+            castForHPwidthForhackmon1P = (int)HPwidthForhackmon1P;
+            spriteBatch.Draw(HPGaugeForHackmon1P, new Vector2(20, 20), new Rectangle(0, 0, castForHPwidthForhackmon1P, 20), Color.White);
+            //Spaceでハックモン1Pの近接攻撃攻撃
             if (KeyboardState.IsKeyDown(Keys.Space))
             {
-                // ハックモン1Pのフィフスラッシュ画像描画
+                // ハックモン1Pの近接攻撃画像描画
                 //Rectangleはintを取るメソッドなのでキャストでfloatをintに変換
-                int castForHackmon1PfifSlashColliderX;
-                castForHackmon1PfifSlashColliderX = (int)hackmon1PfifSlashPosition.X;
-                int castForHackmon1PfifSlashColliderY;
-                castForHackmon1PfifSlashColliderY = (int)hackmon1PfifSlashPosition.Y;
+                int castForHackmon1PjabColliderX;
+                castForHackmon1PjabColliderX = (int)hackmon1P.jabPosition.X;
+                int castForHackmon1PjabColliderY;
+                castForHackmon1PjabColliderY = (int)hackmon1P.jabPosition.Y;
 
-                Rectangle hackmon1PfifSlashCollider = new Rectangle(castForHackmon1PfifSlashColliderX, castForHackmon1PfifSlashColliderY, 90, 90);
+                Rectangle hackmon1PjabCollider = new Rectangle(castForHackmon1PjabColliderX, castForHackmon1PjabColliderY, 90, 90);
 
                 int castForHackmon2PimageColliderX;
                 castForHackmon2PimageColliderX = (int)hackmon2P.position.X;
@@ -407,24 +532,170 @@ namespace DigiDigiStartOver
 
                 Rectangle hackmon2PimageCollider = new Rectangle(castForHackmon2PimageColliderX, castForHackmon2PimageColliderY, 65, 65);
 
-                spriteBatch.Draw(hackmon1PfifSlash, hackmon1PfifSlashPosition, new Rectangle(0, 0, 90, 90), Color.White);
-                //ハックモン1Pがフィフスラッシュしたときにハックモン2Pに当たったらハックモン2Pにダメージ
-                if (hackmon1PfifSlashCollider.Intersects(hackmon2PimageCollider))
+                spriteBatch.Draw(hackmon1P.jab, hackmon1P.jabPosition, new Rectangle(0, 0, 90, 90), Color.White);
+                //ハックモン1Pが近接攻撃したときにハックモン2Pに当たったらハックモン2Pにダメージ
+                if (hackmon1PjabCollider.Intersects(hackmon2PimageCollider))
                 {
-                    HPwidthForhackmon2P -= 1;
+                    float damage;
+                    damage = HPwidthForhackmon2P -= 10.0f ;
                 }
             }
-            //フィフスラッシュの当たり判定を特定する半透明の赤い矩形を描画
-            spriteBatch.Draw(ColliderChecker, hackmon1PfifSlashPosition, new Rectangle(0, 0, 90, 90), Color.Red * 0.5f);
+            //ハックモン１Pの近接攻撃の当たり判定を特定する半透明の赤い矩形を描画
+            spriteBatch.Draw(ColliderChecker, hackmon1P.jabPosition, new Rectangle(0, 0, 90, 90), Color.Yellow * 0.5f);
+           
+            
+            //fでハックモン1Pの遠距離攻撃攻撃
+            if (KeyboardState.IsKeyDown(Keys.F))
+            {
+                // ハックモン1Pの遠距離攻撃画像描画
+                //Rectangleはintを取るメソッドなのでキャストでfloatをintに変換
+                int castForHackmon1PlongRangeAttackColliderX;
+                castForHackmon1PlongRangeAttackColliderX = (int)hackmon1P.longRangeAttackPosition.X;
+                int castForHackmon1PlongRangeAttackColliderY;
+                castForHackmon1PlongRangeAttackColliderY = (int)hackmon1P.longRangeAttackPosition.Y;
+
+                Rectangle hackmon1PlongRangeAttackCollider = new Rectangle(castForHackmon1PlongRangeAttackColliderX, castForHackmon1PlongRangeAttackColliderY, 90, 90);
+
+                int castForHackmon2PimageColliderX;
+                castForHackmon2PimageColliderX = (int)hackmon2P.position.X;
+                int castForHackmon2PimageColliderY;
+                castForHackmon2PimageColliderY = (int)hackmon2P.position.Y;
+
+                Rectangle hackmon2PimageCollider = new Rectangle(castForHackmon2PimageColliderX, castForHackmon2PimageColliderY, 65, 65);
+
+
+
+                if (hackmon1PlongRangeAttackCollider.Intersects(darkTechBackgroundCollider))
+                {
+
+                    spriteBatch.Draw(hackmon1P.longRangeAttack, hackmon1P.longRangeAttackPosition, new Rectangle(0, 0, 90, 90), Color.White);
+
+                        
+
+                    //どうやったら遠距離攻撃が放たれた位置から直線に一定スピードでまっすぐ飛ぶ？
+
+                    //1回fが押されたらhackmon1PlongRangeAttackPositionにハックモンの進行方向に
+                    //向かってx軸、y軸にそれぞれ計算がされて画面外まで遠距離攻撃が飛ぶ
+
+
+                }
+
+                //どうやったらハックモン1Pの遠距離攻撃が表示画面外まで表示され続ける？
+
+                //fボタンを押したら右方向にf長押しで遠距離攻撃が打てるようになった（fボタンを離したら遠距離攻撃が消える）
+                //f押して一回移動しないと再度遠距離攻撃が打てない
+                //fで遠距離攻撃を1回打って、移動しないで再度遠距離攻撃を撃つと前打ったところから遠距離攻撃
+                //が発生して右方向へ飛んでいく
+                //ただfを押して、一回遠距離攻撃を撃ったら、画面外に出るまで遠距離攻撃が継続して
+                //ハックモン1Pの進行方向に向かって移動していくようにする
+                    if (hackmon1PlongRangeAttackCollider.Intersects(darkTechBackgroundCollider))
+                    {
+                        hackmon1P.longRangeAttackPosition.X += 20;
+                    }
+
+
+
+
+                //ハックモン1Pが遠距離攻撃したときにハックモン2Pに当たったらハックモン2Pにダメージ
+                if (hackmon1PlongRangeAttackCollider.Intersects(hackmon2PimageCollider))
+                {
+                    float damage;
+                    damage = HPwidthForhackmon2P -= 1.0f;
+                }
+            }
+            //ハックモン１Pの遠距離攻撃の当たり判定を特定する半透明の赤い矩形を描画
+            spriteBatch.Draw(ColliderChecker, hackmon1P.longRangeAttackPosition, new Rectangle(0, 0, 90, 90), Color.Red * 0.5f);
+
+
+            //ハックモン1Pの名前を描画
+            spriteBatch.Draw(hackmon1P.name, hackmon1P.namePosition, new Rectangle(0, 0, 170, 30), Color.White);
+
 
             //ハックモン2Pの画像を描画
-            spriteBatch.Draw(hackmon2P.Image, hackmon2P.position, new Rectangle(hackmon2PFrame * 65, 0, 65, 65), Color.White);
-            //ハックモン2Pの当たり判定を特定する半透明の赤い矩形を描画
+            spriteBatch.Draw(hackmon2P.image, hackmon2P.position, new Rectangle(hackmon2PFrame * 65, 0, 65, 65), Color.White);
+            //ハックモン2Pの当たり判定を特定する半透明の緑色の矩形を描画
             spriteBatch.Draw(ColliderChecker, hackmon2P.position, new Rectangle(hackmon2PFrame * 65, 0, 65, 65), Color.Green * 0.5f);
             // ハックモン2PのHPBar画像の宣言
             spriteBatch.Draw(HPBarForHackmon2P, new Vector2(530, 20), new Rectangle(0, 0, 250, 20), Color.White);
             // ハックモン2PのHPGauge画像の宣言
-            spriteBatch.Draw(HPGaugeForHackmon2P, new Vector2(530, 20), new Rectangle(0, 0, HPwidthForhackmon2P, 20), Color.White);
+            int castForHPwidthForhackmon2P;
+            castForHPwidthForhackmon2P = (int)HPwidthForhackmon2P;
+            spriteBatch.Draw(HPGaugeForHackmon2P, new Vector2(530, 20), new Rectangle(0, 0, castForHPwidthForhackmon2P, 20), Color.White);
+            //Enterでハックモン2Pの近接攻撃攻撃
+            if (KeyboardState.IsKeyDown(Keys.Enter))
+            {
+                // ハックモン2Pの近接攻撃画像描画
+                //Rectangleはintを取るメソッドなのでキャストでfloatをintに変換
+                int castForHackmon2PjabColliderX;
+                castForHackmon2PjabColliderX = (int)hackmon2P.jabPosition.X;
+                int castForHackmon2PjabColliderY;
+                castForHackmon2PjabColliderY = (int)hackmon2P.jabPosition.Y;
+
+                Rectangle hackmon2PjabCollider = new Rectangle(castForHackmon2PjabColliderX, castForHackmon2PjabColliderY, 90, 90);
+
+                int castForHackmon1PimageColliderX;
+                castForHackmon1PimageColliderX = (int)hackmon1P.position.X;
+                int castForHackmon1PimageColliderY;
+                castForHackmon1PimageColliderY = (int)hackmon1P.position.Y;
+
+                Rectangle hackmon1PimageCollider = new Rectangle(castForHackmon1PimageColliderX, castForHackmon1PimageColliderY, 65, 65);
+
+                spriteBatch.Draw(hackmon2P.jab, hackmon2P.jabPosition, new Rectangle(0, 0, 90, 90), Color.White);
+                //ハックモン2Pが近接攻撃したときにハックモン1Pに当たったらハックモン2Pにダメージ
+                if (hackmon2PjabCollider.Intersects(hackmon1PimageCollider))
+                {
+                    float damage;
+                    damage = HPwidthForhackmon1P -= 10.0f;
+                }
+            }
+            //ハックモン2Pの近接攻撃の当たり判定を特定する半透明の赤い矩形を描画
+            spriteBatch.Draw(ColliderChecker, hackmon2P.jabPosition, new Rectangle(0, 0, 90, 90), Color.Red * 0.5f);
+
+
+           
+            //次の機能
+            
+            //ハックモン１Pかハックモン2PのどちらかのHPが0になったらゲームが終わって
+            //Exitするかゲームを再開できる
+            //どうやって再開する？
+            //→体力ゲージとハックモンの位置をスタート時に戻す
+
+            if (HPwidthForhackmon1P <= 0 || HPwidthForhackmon2P <= 0)
+            {
+                spriteBatch.Draw(Complete, new Vector2(300, 300), new Rectangle(0, 0, 500, 100), Color.White);
+                walkSpeed = 1;　//HPが0になった後に移動するとフレームレートが落ちてゲームを
+                //もう一度始める時間が遅くなる
+
+                frame++;
+                //ゲームをもう一度やるまでの余韻の時間
+                if (frame >= 60)
+                {
+                    //ゲームをもう一度やる
+                    Initialize();
+
+                    spriteBatch.Begin();
+
+                    //回数をクリア
+                    frame = 0;
+                }
+
+                
+
+
+
+
+                //Console.WriteLine("モウヒトショウブする？:y/n");
+                //var playerAnswer = Console.ReadLine();
+                //if (playerAnswer == "y")
+                //{
+                //    Initialize();
+                //}
+                //if (playerAnswer == "n")
+                //{
+                //    this.Exit();
+                //}
+            }
+
 
 
             spriteBatch.End();

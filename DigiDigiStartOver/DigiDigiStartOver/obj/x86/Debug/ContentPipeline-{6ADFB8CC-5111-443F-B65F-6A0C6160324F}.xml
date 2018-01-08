@@ -91,6 +91,15 @@
       <Output>C:\Users\Wing\Documents\Visual Studio 2015\Projects\DigiDigiStartOver\DigiDigiStartOver\DigiDigiStartOver\bin\x86\Debug\Content\hackmonLongRangeAttack.xnb</Output>
       <Time>2018-01-01T20:44:22.9265662+09:00</Time>
     </Item>
+    <Item>
+      <Source>hackmonLongRangeAttack2.PNG</Source>
+      <Name>hackmonLongRangeAttack2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Wing\Documents\Visual Studio 2015\Projects\DigiDigiStartOver\DigiDigiStartOver\DigiDigiStartOver\bin\x86\Debug\Content\hackmonLongRangeAttack2.xnb</Output>
+      <Time>2018-01-08T22:06:54.0407857+09:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{6ADFB8CC-5111-443F-B65F-6A0C6160324F}</ContentProjectGUID>

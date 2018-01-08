@@ -8,3 +8,4 @@ Content\hackmon1Pname.xnb
 Content\Complete.xnb
 Content\hackmonJab.xnb
 Content\hackmonLongRangeAttack.xnb
+Content\hackmonLongRangeAttack2.xnb

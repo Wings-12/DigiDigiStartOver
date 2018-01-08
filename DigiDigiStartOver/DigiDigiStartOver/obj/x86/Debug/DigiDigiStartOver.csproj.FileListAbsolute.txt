@@ -24,3 +24,4 @@ C:\Users\Wing\Documents\Visual Studio 2015\Projects\DigiDigiStartOver\DigiDigiSt
 C:\Users\Wing\Documents\Visual Studio 2015\Projects\DigiDigiStartOver\DigiDigiStartOver\DigiDigiStartOver\bin\x86\Debug\Content\Complete.xnb
 C:\Users\Wing\Documents\Visual Studio 2015\Projects\DigiDigiStartOver\DigiDigiStartOver\DigiDigiStartOver\bin\x86\Debug\Content\hackmonJab.xnb
 C:\Users\Wing\Documents\Visual Studio 2015\Projects\DigiDigiStartOver\DigiDigiStartOver\DigiDigiStartOver\bin\x86\Debug\Content\hackmonLongRangeAttack.xnb
+C:\Users\Wing\Documents\Visual Studio 2015\Projects\DigiDigiStartOver\DigiDigiStartOver\DigiDigiStartOver\bin\x86\Debug\Content\hackmonLongRangeAttack2.xnb

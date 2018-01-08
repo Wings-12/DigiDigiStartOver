@@ -23,7 +23,9 @@ namespace DigiDigiStartOver
         public Texture2D jab;
         public Vector2 jabPosition;
         public Texture2D longRangeAttack;
+        public Texture2D longRangeAttack2;
         public Vector2 longRangeAttackPosition;
+        public Vector2 longRangeAttackPosition2;
 
         /// <summary>
         /// ハックモンのコンストラクタ（全パラメータの初期化）
@@ -155,10 +157,14 @@ namespace DigiDigiStartOver
             hackmon2P.position = new Vector2(500, 200);
             //ハックモン2PのHPの初期化
             HPwidthForhackmon2P = 250.0f;
+            // ハックモン2Pの近接攻撃画像座標の宣言
+            this.hackmon2P.jabPosition = new Vector2(450, 200);
+            // ハックモン2Pの遠距離攻撃画像2座標の宣言
+            this.hackmon2P.longRangeAttackPosition2 = new Vector2(450, 200);
 
 
             //キャラの歩くスピードを初期化
-            walkSpeed = 4;
+            walkSpeed = 10;
 
 
             base.Initialize();
@@ -211,6 +217,8 @@ namespace DigiDigiStartOver
             HPGaugeForHackmon2P = Content.Load<Texture2D>("HPGauge"); ;
             // ハックモン2Pの近接攻撃画像のロード
             hackmon2P.jab = Content.Load<Texture2D>("hackmonjab");
+            // ハックモン1Pの遠距離攻撃画像のロード
+            hackmon2P.longRangeAttack2 = Content.Load<Texture2D>("hackmonlongRangeAttack2");
 
 
             //ハックモン１Pかハックモン2PのどちらかのHPが0になったら「Complete」と表示する(ロード)
@@ -588,10 +596,10 @@ namespace DigiDigiStartOver
                 //が発生して右方向へ飛んでいく
                 //ただfを押して、一回遠距離攻撃を撃ったら、画面外に出るまで遠距離攻撃が継続して
                 //ハックモン1Pの進行方向に向かって移動していくようにする
-                    if (hackmon1PlongRangeAttackCollider.Intersects(darkTechBackgroundCollider))
-                    {
-                        hackmon1P.longRangeAttackPosition.X += 20;
-                    }
+                if (hackmon1PlongRangeAttackCollider.Intersects(darkTechBackgroundCollider))
+                {
+                    hackmon1P.longRangeAttackPosition.X += 20;
+                }
 
 
 
@@ -600,7 +608,7 @@ namespace DigiDigiStartOver
                 if (hackmon1PlongRangeAttackCollider.Intersects(hackmon2PimageCollider))
                 {
                     float damage;
-                    damage = HPwidthForhackmon2P -= 1.0f;
+                    damage = HPwidthForhackmon2P -= 10.0f;
                 }
             }
             //ハックモン１Pの遠距離攻撃の当たり判定を特定する半透明の赤い矩形を描画
@@ -652,9 +660,74 @@ namespace DigiDigiStartOver
             spriteBatch.Draw(ColliderChecker, hackmon2P.jabPosition, new Rectangle(0, 0, 90, 90), Color.Red * 0.5f);
 
 
-           
+
+            //fでハックモン2Pの遠距離攻撃攻撃
+            if (KeyboardState.IsKeyDown(Keys.L))
+            {
+                // ハックモン1Pの遠距離攻撃画像描画
+                //Rectangleはintを取るメソッドなのでキャストでfloatをintに変換
+                int castForHackmon2PlongRangeAttackColliderX;
+                castForHackmon2PlongRangeAttackColliderX = (int)hackmon2P.longRangeAttackPosition2.X;
+                int castForHackmon2PlongRangeAttackColliderY;
+                castForHackmon2PlongRangeAttackColliderY = (int)hackmon2P.longRangeAttackPosition2.Y;
+
+                Rectangle hackmon2PlongRangeAttackCollider = new Rectangle(castForHackmon2PlongRangeAttackColliderX, castForHackmon2PlongRangeAttackColliderY, 190, 190);
+
+                int castForHackmon1PimageColliderX;
+                castForHackmon1PimageColliderX = (int)hackmon1P.position.X;
+                int castForHackmon1PimageColliderY;
+                castForHackmon1PimageColliderY = (int)hackmon1P.position.Y;
+
+                Rectangle hackmon1PimageCollider = new Rectangle(castForHackmon1PimageColliderX, castForHackmon1PimageColliderY, 65, 65);
+
+
+
+                if (hackmon2PlongRangeAttackCollider.Intersects(darkTechBackgroundCollider))
+                {
+
+                    spriteBatch.Draw(hackmon2P.longRangeAttack2, hackmon2P.longRangeAttackPosition2, new Rectangle(0, 0, 190, 190), Color.White);
+
+
+
+                    //どうやったら遠距離攻撃が放たれた位置から直線に一定スピードでまっすぐ飛ぶ？
+
+                    //1回fが押されたらhackmon2PlongRangeAttackPositionにハックモンの進行方向に
+                    //向かってx軸、y軸にそれぞれ計算がされて画面外まで遠距離攻撃が飛ぶ
+
+
+                }
+
+                //どうやったらハックモン1Pの遠距離攻撃が表示画面外まで表示され続ける？
+
+                //fボタンを押したら右方向にf長押しで遠距離攻撃が打てるようになった（fボタンを離したら遠距離攻撃が消える）
+                //f押して一回移動しないと再度遠距離攻撃が打てない
+                //fで遠距離攻撃を1回打って、移動しないで再度遠距離攻撃を撃つと前打ったところから遠距離攻撃
+                //が発生して右方向へ飛んでいく
+                //ただfを押して、一回遠距離攻撃を撃ったら、画面外に出るまで遠距離攻撃が継続して
+                //ハックモン2Pの進行方向に向かって移動していくようにする
+                if (hackmon2PlongRangeAttackCollider.Intersects(darkTechBackgroundCollider))
+                {
+                    hackmon2P.longRangeAttackPosition2.X -= 10;
+                }
+
+
+
+
+                //ハックモン2Pが遠距離攻撃したときにハックモン1Pに当たったらハックモン1Pにダメージ
+                if (hackmon2PlongRangeAttackCollider.Intersects(hackmon1PimageCollider))
+                {
+                    float damage;
+                    damage = HPwidthForhackmon1P -= 8.0f;
+                }
+            }
+            //ハックモン2Pの遠距離攻撃の当たり判定を特定する半透明の赤い矩形を描画
+            spriteBatch.Draw(ColliderChecker, hackmon2P.longRangeAttackPosition, new Rectangle(0, 0, 190, 190), Color.Red * 0.5f);
+
+
+
+
             //次の機能
-            
+
             //ハックモン１Pかハックモン2PのどちらかのHPが0になったらゲームが終わって
             //Exitするかゲームを再開できる
             //どうやって再開する？
